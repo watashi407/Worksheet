@@ -30,10 +30,10 @@ export async function createTodo(_:unknown,formData:FormData){
     revalidatePath("/ac8")
 }
 
-export async function fetchTodos(){
+export async function fetchTodos(id:string){
     const supabase = await createClient();
 
-    const {data,error:Error,} = await supabase.from("todos").select("*");
+    const {data,error:Error,} = await supabase.from("todos").select("*").eq("user_id",id);
     if(Error){
         return {
             status:Error?.message,
@@ -41,7 +41,8 @@ export async function fetchTodos(){
         }
     }
 
-    return {error:Error,todos:data}
+    return {success:"success",todos:data}
+    
 }
 
 
@@ -74,4 +75,25 @@ export async function todoUndoComplete(id:string){
       } 
       revalidatePath("/ac8")
 
+}
+
+
+export async function fetchByEmail(email: string) {
+    const supabase = await createClient();
+
+    const { error: Error, data: userRecord } = await supabase
+        .from("user_profiles")
+        .select("id")
+        .eq("email", email)
+        .limit(1)
+        .single();
+
+    if (Error) {
+        return { success: false, error: Error.message }; // Proper error format
+    }
+
+
+    const jsonRecord = userRecord ? JSON.parse(JSON.stringify(userRecord)) : null;
+
+    return { success: true, data: jsonRecord };
 }
