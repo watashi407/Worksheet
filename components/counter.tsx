@@ -2,20 +2,21 @@
 import React, { useState } from "react";
 
 const Counter: React.FC = () => {
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
 
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
-  const reset = () => setCount(0);
+  const increment = () => {
+    console.log(count);
+    setCount(count * 2);
+  };
+  const decrement = () => setCount(count / 2);
+  const reset = () => setCount(1);
 
-  const isEven = count % 2 === 0;
+  // const isEven = count % 2 === 0;
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl font-bold mb-4">Counter: {count}</h1>
-      <p className="text-xl mb-4">
-        This number is <strong>{isEven ? "Even" : "Odd"}</strong>.
-      </p>
+
       <div className="flex space-x-4">
         <button
           onClick={increment}

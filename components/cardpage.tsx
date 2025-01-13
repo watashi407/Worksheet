@@ -5,7 +5,6 @@ import { ApiResponse } from "../types/type";
 
 const CardList: React.FC = () => {
   const [users, setUsers] = useState<ApiResponse[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,17 +25,12 @@ const CardList: React.FC = () => {
         console.log("formattedData", formattedData);
         setUsers(formattedData);
       } catch (error) {
-        setError("Failed to fetch data. Please try again later.");
-        console.error("Fetch error:", error);
+        console.error("Failed to fetch data. Please try again later.", error);
       }
     };
 
     fetchData();
   }, []);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div className="flex flex-wrap justify-center gap-6">

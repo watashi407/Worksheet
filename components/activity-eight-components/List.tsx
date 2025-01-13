@@ -13,7 +13,7 @@ export default function List({ task, id, isCompleted }: Props) {
       {" "}
       <li
         key={id}
-        className="border-none p-4 my-2 rounded flex justify-between items-center "
+        className="border-none p-2  rounded flex justify-between items-center "
       >
         {isCompleted ? (
           <span

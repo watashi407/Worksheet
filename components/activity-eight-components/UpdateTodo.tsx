@@ -12,12 +12,18 @@ export default function UpdateTodo({ id, isCompleted }: DeleteTodoProps) {
   return (
     <div>
       {isCompleted ? (
-        <button
-          className="p-2 bg-slate-800 rounded-md text-white font-bold"
-          onClick={() => todoUndoComplete(id)}
+        <form
+          action={() => {
+            todoUndoComplete(id);
+          }}
         >
-          <FaUndo />
-        </button>
+          <button
+            type="submit"
+            className="p-2 bg-slate-800 rounded-md text-white font-bold"
+          >
+            <FaUndo />
+          </button>
+        </form>
       ) : (
         <button
           className="p-2 bg-green-500 rounded-md text-white font-bold"

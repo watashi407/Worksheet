@@ -8,8 +8,8 @@ import { revalidatePath } from "next/cache";
 
 export async function createTodo(_:unknown,formData:FormData){
     const supabase = await createClient();
-
     const task = formData.get("task") as string;
+
     try{
     const {error: insertError} = await supabase.from("todos").insert(({task:task}))
     if(insertError){
